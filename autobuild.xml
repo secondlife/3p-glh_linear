@@ -4,7 +4,7 @@
     <key>package_description</key>
     <map>
       <key>canonical_repo</key>
-      <string>https://bitbucket.org/lindenlab/3p-glh_linear</string>
+      <string>https://github.com/secondlife/3p-glh_linear</string>
       <key>copyright</key>
       <string>Copyright (c) 2000 Cass Everitt</string>
       <key>description</key>
