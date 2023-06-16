@@ -50,7 +50,7 @@ glh_linear.h
 #define GLH_LINEAR_H
 
 #include <memory.h>
-#include <math.h>
+#include <cmath>
 #include <assert.h>
 
 // only supports float for now...
@@ -122,7 +122,7 @@ namespace glh
 		{
 			T r = 0;
 			for(int i = 0; i < N; i++) r += v[i]*v[i]; 
-			return T(sqrt(r));
+			return T(std::sqrt(r));
 		}	
 		
 		T square_norm() const
@@ -141,7 +141,7 @@ namespace glh
 			T sum(0);
 			for(int i = 0; i < N; i++) 
                 sum += v[i]*v[i];
-			sum = T(sqrt(sum));
+			sum = T(std::sqrt(sum));
             if (sum > GLH_EPSILON)
 			    for(int i = 0; i < N; i++) 
                     v[i] /= sum;
@@ -372,7 +372,7 @@ namespace glh
         {
   
           // quick check to see if parallel -- if so, quit.
-          if(fabs(direction.dot(line2.direction)) == 1.0)
+          if(std::fabs(direction.dot(line2.direction)) == 1.0)
 	          return 0;
           line l2 = line2;
   
@@ -640,9 +640,9 @@ namespace glh
 		real scp[4];
 		for(i=0;i<4;i++)
 		{
-			scp[i] = real(fabs(s[i][0]));
+			scp[i] = real(std::fabs(s[i][0]));
 			for(j=1;j<4;j++)
-				if(real(fabs(s[i][j])) > scp[i]) scp[i] = real(fabs(s[i][j]));
+				if(real(std::fabs(s[i][j])) > scp[i]) scp[i] = real(std::fabs(s[i][j]));
 				if(scp[i] == 0.0) return minv; // singular matrix!
 		}
 		
@@ -652,11 +652,11 @@ namespace glh
 		{
 			// select pivot row
 			pivot_to = i;
-			scp_max = real(fabs(s[i][i]/scp[i]));
+			scp_max = real(std::fabs(s[i][i]/scp[i]));
 			// find out which row should be on top
 			for(p=i+1;p<4;p++)
-				if(real(fabs(s[p][i]/scp[p])) > scp_max)
-				{ scp_max = real(fabs(s[p][i]/scp[p])); pivot_to = p; }
+				if(real(std::fabs(s[p][i]/scp[p])) > scp_max)
+				{ scp_max = real(std::std::fabs(s[p][i]/scp[p])); pivot_to = p; }
 				// Pivot if necessary
 				if(pivot_to != i)
 				{
@@ -1085,7 +1085,7 @@ namespace glh
 
     void get_value( vec3 &axis, real &radians ) const
     {
-        radians = real(acos( q[3] ) * GLH_TWO);
+        radians = real(std::acos( q[3] ) * GLH_TWO);
         if ( radians == GLH_ZERO )
             axis = vec3( 0.0, 0.0, 1.0 );
         else
@@ -1155,7 +1155,7 @@ namespace glh
 
         if ( tr > GLH_ZERO )
         {
-            s = real(sqrt( tr + m(3,3) ));
+            s = real(std::sqrt( tr + m(3,3) ));
             q[3] = real ( s * 0.5 );
             s = real(0.5) / s;
 
@@ -1175,7 +1175,7 @@ namespace glh
             j = nxt[i];
             k = nxt[j];
 
-            s = real(sqrt( ( m(i,j) - ( m(j,j) + m(k,k) )) + GLH_ONE ));
+            s = real(std::sqrt( ( m(i,j) - ( m(j,j) + m(k,k) )) + GLH_ONE ));
 
             q[i] = real ( s * 0.5 );
             s = real(0.5 / s);
@@ -1202,14 +1202,14 @@ namespace glh
         else 
         {
             theta *= real(0.5);
-            real sin_theta = real(sin(theta));
+            real sin_theta = real(std::sin(theta));
 
             if (!equivalent(sqnorm,GLH_ONE)) 
-              sin_theta /= real(sqrt(sqnorm));
+              sin_theta /= real(std::sqrt(sqnorm));
             x = sin_theta * axis.v[0];
             y = sin_theta * axis.v[1];
             z = sin_theta * axis.v[2];
-            w = real(cos(theta));
+            w = real(std::cos(theta));
         }
         return *this;
     }
@@ -1251,7 +1251,7 @@ namespace glh
 
         p1 = p1.cross(p2);  
         p1.normalize();
-        set_value(p1,real(acos(alpha)));
+        set_value(p1,real(std::acos(alpha)));
 
         counter = 0;
         return *this;
@@ -1289,7 +1289,7 @@ namespace glh
 
     void normalize()
     {
-        real rnorm = GLH_ONE / real(sqrt(w * w + x * x + y * y + z * z));
+        real rnorm = GLH_ONE / real(std::sqrt(w * w + x * x + y * y + z * z));
         if (equivalent(rnorm, GLH_ZERO))
             return;
         x *= rnorm;
@@ -1385,11 +1385,11 @@ namespace glh
         if(cos_omega <= GLH_ONE - GLH_EPSILON)
             return p;
 
-        real omega = real(acos(cos_omega));
-        real one_over_sin_omega = GLH_ONE / real(sin(omega));
+        real omega = real(std::acos(cos_omega));
+        real one_over_sin_omega = GLH_ONE / real(std::sin(omega));
 
-        beta    = real(sin(omega*beta)  * one_over_sin_omega);
-        alpha   = real(sin(omega*alpha) * one_over_sin_omega);
+        beta    = real(std::sin(omega*beta)  * one_over_sin_omega);
+        alpha   = real(std::sin(omega*alpha) * one_over_sin_omega);
 
         if (bflip)
             alpha = -alpha;
