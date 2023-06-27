@@ -3,7 +3,7 @@
 set -e
 
 # bump this version as necessary
-echo "1.0" > version.txt
+echo "1.0.1-dev3" > version.txt
 
 echo $(pwd)
 
