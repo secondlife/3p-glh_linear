@@ -656,7 +656,7 @@ namespace glh
 			// find out which row should be on top
 			for(p=i+1;p<4;p++)
 				if(real(std::fabs(s[p][i]/scp[p])) > scp_max)
-				{ scp_max = real(std::std::fabs(s[p][i]/scp[p])); pivot_to = p; }
+				{ scp_max = real(std::fabs(s[p][i]/scp[p])); pivot_to = p; }
 				// Pivot if necessary
 				if(pivot_to != i)
 				{
