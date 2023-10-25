@@ -20,7 +20,7 @@
         <key>common</key>
         <map>
           <key>build_directory</key>
-          <string>glh_linear</string>
+          <string>stage</string>
           <key>configurations</key>
           <map>
             <key>default</key>
@@ -29,10 +29,11 @@
               <map>
                 <key>arguments</key>
                 <array>
-                  <string>not doing anything</string>
+                  <string>-c</string>
+                  <string>../build-cmd.sh</string>
                 </array>
                 <key>command</key>
-                <string>echo</string>
+                <string>bash</string>
               </map>
               <key>default</key>
               <string>true</string>
@@ -50,8 +51,8 @@
           <string>common</string>
         </map>
       </map>
-      <key>version_file</key>
-      <string>../VERSION.txt</string>
+      <key>use_scm_version</key>
+      <boolean>true</boolean>
     </map>
     <key>type</key>
     <string>autobuild</string>
